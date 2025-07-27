@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quize Level 2 C++</title>
+    <link rel="stylesheet" href="~/css/quize1.css">
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+    <script src="~/js/quizel2-4.js" asp-append-version="true" defer></script>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h2 id="question-counter">1 / 10</h2>
+            <h2>C++ Quiz 4 Questions</h2>
+        </div>
+
+        <div class="flashcard" onclick="flipCard(event)">
+            <div class="flashcard-inner" id="flashcard-inner">
+                <div class="flashcard-front" id="question-text">
+                    <h2>The statements inside a do/while loop will always execute at least once.</h2>
+                </div>
+                <div class="flashcard-back" id="answer-text">
+                    <h2>True</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button onclick="previousQuestion()">◀</button>
+            <button onclick="nextQuestion()">▶</button>
+        </div>
+
+        <div class="bottom">
+            <button id="submit-btn">Submit</button>
+            <button id="reset-btn">Reset</button>
+
+            <div id="score-popup" class="popup">
+                <div class="popup-content">
+                    <h2>Score</h2>
+                    <div id="score-circle" class="score-circle">
+                        <span id="score-text">0</span>
+                    </div>
+                    <button onclick="closeScorePopup()">Close</button>
+                </div>
+            </div>
+
+            <div id="no-answer-popup" class="popup">
+                <div class="popup-content">
+                    <h2>Oops!</h2>
+                    <p>Choose your all answer before moving on!</p>
+                    <button onclick="closeNoAnswerPopup()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/quizel2-4.js"></script>
+</body>

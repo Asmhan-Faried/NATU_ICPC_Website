@@ -1,0 +1,665 @@
+﻿@{
+    Layout = null;
+}
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Secret</title>
+    <link rel="stylesheet" href="~/css/page.css">
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+</head>
+<body>
+    <style>
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+
+        @@keyframes realisticBounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            10% {
+                transform: translateY(-30px);
+            }
+
+            20% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-20px);
+            }
+
+            40% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(0);
+            }
+
+            70% {
+                transform: translateY(-5px);
+            }
+
+            80% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup('popup')">×</button>
+            <div class="popup-flex">
+
+                <div class="popup-text">
+                    <h2>✨ أهلاً بيك في Top Secret ✨</h2>
+                    <p style="line-height: 1.1;">
+
+                        الصفحة دي معمولة عشان تساعدك تتطوّر.<br>
+                        كل حاجة هنا متقسّمة ومنظمة عشان تسهّل عليك الطريق بدل ما تلف وتدوّر كتير.<br>
+                        ركّز معايا وخد فكرة سريعة عن كل قسم موجود :<br><br>
+
+                        🧠 <strong>1- حاجات لازم تعرفها قبل ما تبدأ في الـ Competitive Programming</strong><br>
+                        قبل ما تدخل عالم الـ CP، لازم تكون فاهم شوية مفاهيم أساسية:<br>
+                        تبدأ بإيه وازاي؟ تكون تيم إزاي؟ تشترك إزاي؟<br><br>
+
+                        💪 <strong>2- شيتات Problem Solving متنوعة</strong><br>
+                        شيتات من مصادر مختلفة
+                        كل ما تحل أكتر، مستواك هيعلى.<br><br>
+
+                        🌞❄️ <strong>3- شيتات الكامبات الصيفية والشتوية</strong><br>
+                        الشيتات دي هتديك نفس التجربة الكامب<br><br>
+
+                        🔍 <strong>4- مواقع هتساعدك تسد الصغرات</strong><br>
+                        عندك مشكله فى اى توبيك
+                        المواقع ديه بتجبلك مسائل على حسب التوبيك أو الـ rate.<br><br>
+
+                        🗃️ <strong>5- أرشيف مسابقات</strong><br>
+                        هتلاقي هنا مسابقات من السنين اللي فاتت، تحلها كأنك في مسابقة .<br><br>
+
+                        🌍 <strong>6- مسابقات هتطور من مستواك</strong><br>
+                        البوكس ده فيه كل المسابقات اللي تهمك: محلي، عالمي، وكل واحدة معاها لينكها.<br><br>
+
+                        🧭 <strong>7- اختار التراك المناسب ليك</strong><br>
+                        القسم ده هيعرفك إزاي التراكات المختلفة (Web – AI) بتتقاطع مع الـ Problem Solving.<br><br>
+                        <strong>السر مش في إنك تبدأ… السر الحقيقي إنك تكمّل</strong>💙
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <h2 class="heading head">Top Secret</h2>
+    <h1 style="align-items: center;
+    display: flex;
+    justify-content: center;">
+        🎯 تعالى هنا.. وابدأ صح بطريقتنا 😎
+    </h1>
+    <div class="container">
+
+
+        <!------------------- Start Sec 1---------------------------------->
+        <div class="section">
+            <h2>حاجات لازم تعرفها قبل المسابقة 👣</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        يعنى ايه تسجل فى ECPC؟ لما تيجي تقدم، هتحتاج تعمل أكونت، وتقدم بالتيم بتاعك على الموقع الرسمي.<br>
+                        وكمان، قبل المسابقة، هتحتاج تكون Team على Codeforces وتبدأوا تحلوا مع بعض،<br>
+                        عشان تتعودوا على شكل التعاون فى الحل وتستعدوا كويس 👨‍💻👩‍💻<br><br>
+                        كل ديه حاجات انت هتحتاجها لو داخل المسابقة، وكنت زيك في يوم من الأيام،<br>
+                        وكنت بدوّر على خطوات واضحة تساعدني أبدأ بسهولة وماكنتش بلاقيها.<br><br>
+                        علشان كده، جمعتلك كل اللى هيسهّل عليك البداية ويوفر عليك وقت ومجهود.<br>
+                        من الآخر: دليلك البسيط لأول خطوة في طريق كبير 💡
+                    </p>
+                    <button class="bottom-glass" id="soundButton1" onclick="openPopup('popup4')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound1" src="~/img/انت ايه اللي جابك هنا.wav" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img style="min-height: 346px;" src="~/img/sec-1.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup4" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup4')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+
+
+                    <div class="popup-text popup-acpc-text">
+                        <h2 class="head-center">كل اللي لازم تعرفه قبل ما تدخل ECPC 🚀</h2>
+                        <p>
+                            بتفكر تدخل مسابقة ECPC بس مش عارف تبدأ منين؟ متقلقش، هنا هتلاقي كل الخطوات اللي هتخلّيك جاهز بسهولة! 💡<br><br>
+                            المسابقة دي مش مجرد تحدي، دي فرصة إنك تطور مهاراتك، تشتغل مع تيمك، وتعيش جو المنافسة الحقيقي 🏆.<br><br>
+                            عشان تبدأ صح، فيه كام خطوة مهمة لازم تعرفهم، من إزاي تسجل أكونت، لإزاي تكوّن تيم، لحد ما تقدم رسمي في المسابقة.<br><br>
+                            جمعتلك دليل بسيط ومرتب يوفر عليك المجهود ويخلّيك مركز على اللي يهم: إنك تكون جاهز للتحدي! 🔥<br><br>
+
+                            <strong class="strong">الخطوات اللي لازم تعرفها:-</strong><br><br>
+
+                            أول حاجة لازم تعملها عشان تبدأ تحل مسائل وتشوف الشيتات.<br>
+                            <strong> تعمل أكونت على Codeforces:</strong><br>
+                            <a href="https://www.youtube.com/watch?v=w01PmtSsPcw&t=95s" target="_blank">إزاي تعمل أكونت على Codeforces</a><br><br>
+
+
+                            قبل المسابقة، لازم تكون تيم عشان تتدرب مع زمايلك وتتعودوا على الحل الجماعي.<br>
+                            <strong> كون تيم على Codeforces:</strong><br>
+                            <a href="https://www.youtube.com/watch?v=yjQ3mHHSCNA&t=13s" target="_blank">إزاي تكوّن تيم على Codeforces</a><br><br>
+
+
+                            لازم تقدم على الموقع الرسمي وتدخل بياناتك صح عشان تتأهل.<br>
+                            <strong>سجل في موقع ICPC الرسمي:</strong><br>
+                            <a href="https://www.youtube.com/watch?v=ncXIhhEf0fI" target="_blank">إزاي تسجل أكونت في موقع ICPC</a><br><br>
+
+
+                            لما تتأهل، الأدمن بيسجل التيم رسمي في المسابقة.<br>
+                            <strong>سجل التيم بتاعك للمسابقة:</strong><br>
+                            <a href="https://www.youtube.com/watch?v=cRl_jPHcyEU" target="_blank">إزاي تسجل تيم على موقع ICPC</a><br><br>
+                            لازم تدرب على نوعية من مسابقات ال ECPC عن طريق الاشتراك فى مسابقات زى ال KicKof هتطور من مستواك واحنا لسة هنكلمك عنها اكتر وفيه لينكات ليها للسنين اللى فاتت فى قسم ارشيف المسابقات <br> <br>
+
+                            كل خطوة هنا هتخلّيك أقرب لتحقيق حلمك في ECPC!<br> يلا، ابدأ دلوقتي واستعد تكسر الدنيا! 🌟
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--------------------- End Sec 1 ----------------------------------->
+        <!----------------------Start Sec 2---------------------------------->
+
+        <div class="section">
+            <h2>شيتات هتطور من مستواك 🔍</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        💡 لو بتدور على طريقة تبدأ بيها تطوير مهاراتك في الـ Problem Solving<br>
+                        سواء علشان تبقى أقوى في البرمجة 💻، تجهز لـ interviews 🎯، أو حتى تحب تحل مسائل وتفكر بشكل منطقي 🧠، فالموضوع أبسط مما تتخيل.<br>
+                        أنا جمعتلك شيتات فيها كل المستويات، من أول الصفر لحد مسائل متقدمة جدًا.<br><br>
+                        🔥 أهم حاجة إنك تحافظ على الاستمرارية، حتى لو بتحل مسألة واحدة في اليوم.<br>
+                        ⏳ بعد شهر هتشوف الفرق بنفسك، وبعد 3 شهور هتبدأ تحل مسائل كنت شايفها مستحيلة 💪
+                    </p>
+
+                    <button class="bottom-glass" id="soundButton2" onclick="openPopup('popup1')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound2" src="~/img/رياكشن_اللهم_صل_على_النبي_انت_جبت_ذي_المعلومات_من_وينMP3.mp3" preload="auto"></audio> *@
+
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup1" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup1')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+                    <h2 class="popup-title popup-acpc-title">عايز تطور مهاراتك في Problem Solving ؟ 🤔</h2>
+
+                    <div class="popup-text popup-acpc-text">
+
+                        <p>
+                            تعالى أقولك تبدأ منين! <br />
+                            سواء هدفك:<br>
+                            - تبقى أقوى في البرمجة وتفهم الكود صح 💻<br>
+                            - تجهز لمقابلات العمل وتعدي الـ technical interviews بسهولة 🎯<br>
+                            - أو حتى تستمتع بحل المسائل وتحب التفكير المنطقي 🧩<br><br>
+
+                            فأنت فعلاً على أول الطريق الصح، والمفاجأة؟ الطريق مش صعب زي ما متخيل!<br><br>
+
+                            ✅ <strong>ابدأ من النهاردة</strong> - حتى لو بمسألة واحدة يوميًا!<br>
+                            أهم حاجة في الرحلة دي <strong>الاستمرارية</strong>، مش السرعة.<br><br>
+
+                            ⏳ بعد شهر بس هتلاقي نفسك أسرع في الحل.<br>
+                            🔥 وبعد 3 شهور هتبدأ تحل مسائل كنت شايفها مستحيلة!<br><br>
+
+                            <strong>💼 طيب أبدأ منين؟</strong><br>
+                            جمعتلك شيتات قوية من جامعات مختلفة + شيتات Mostafa Saad، مرتبة حسب المستوى من مبتدئ لمحترف:<br><br>
+
+                            🟡 <strong>FCAI Cairo Sheet</strong><br>
+                            <a href="https://vjudge.net/group/level_zero_2023" target="_blank">Level Zero Sheet</a><br><br>
+
+                            🔵 <strong>Al-Azhar University Sheets</strong><br>
+                            <a href="https://codeforces.com/group/Bu2yXAqHyK/contest/473638" target="_blank">Sheet 1</a><br>
+                            <a href="https://codeforces.com/group/F65IvyuwZ3/contests" target="_blank">Sheet 2</a><br>
+                            <a href="https://codeforces.com/group/uOFUDw8ZO5/contests" target="_blank">Sheet 3</a><br>
+                            <a href="https://codeforces.com/group/UPFcuYqfmu/contests" target="_blank">Sheet 4</a><br><br>
+
+                            🔴 <strong>Mansoura University Sheets</strong><br>
+                            <a href="https://codeforces.com/blog/entry/113840" target="_blank">Blog & Levels</a><br>
+                            <a href="https://codeforces.com/group/5pUldkahAU/contests" target="_blank">Group Contests</a><br><br>
+
+                            🟣 <strong>Ain Shams University Sheets</strong><br>
+                            <a href="https://codeforces.com/group/TQW9Aqd7NB" target="_blank">Codeforces Group</a><br>
+                            <a href="https://vjudge.net/group/lvl2training2024mirror" target="_blank">VJudge Training Mirror</a><br><br>
+
+                            🟢 <strong>Helwan University Sheet</strong><br>
+                            <a href="https://codeforces.com/group/LKPSX7Pt2W/contests" target="_blank">Contests Group</a><br><br>
+
+                            🧡 <strong>Rokba Park Sheet</strong><br>
+                            <a href="https://vjudge.net/group/rokba" target="_blank">VJudge Group</a><br><br>
+
+                            🩵 <strong>CP CIRCUS </strong><br>
+                            <a href="https://vjudge.net/group/cp-circus" target="_blank">VJudge Group</a><br><br>
+
+
+                            ⭐ <strong>Mostafa Saad’s Sheets</strong><br>
+                            <a href="https://goo.gl/unDETI" target="_blank">CP Fundamental Sheet</a><br>
+                            <a href="https://goo.gl/CEwCjS" target="_blank">Interview Preparation Sheet</a><br><br>
+
+
+
+                            🏁 <strong>نصايح للمبتدئين:</strong><br>
+                            - متقارنش نفسك بحد، قارن نفسك بنفسك.<br>
+                            - ركز على الفهم قبل ما تركز على السرعة.<br>
+                            - لو معرفتش تحل، اقرأ الحل وافهمه وارجعله تاني.<br>
+                            - اعمل دفتر للأخطاء والحلول الجديدة.<br>
+                            - ذاكر مع ناس، التطور أسرع لما تكون وسط مجتمع.<br><br>
+
+                            ابدأ من دلوقتي، ومع الوقت هتشوف الفرق الكبير 💪
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------End Sec 2---------------------------------->
+        <!------------------------ Start Sec 3 -------------------------------->
+
+        <div class="section">
+            <h2> شيتات الكامبات الصيفية/الشتوية ☀️❄️</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        هنا بقى المستوى بيعلى! 😎 الشيتات ديه مش عادية، دي شيتات الكامبات الصيفية والشتوية اللي بتتعامل في جامعات مختلفة،<br>
+                        وغالبًا بتكون أقوى وأصعب من الشيتات العادية، عشان كده تعتبر فرصة ذهبية إنك تتحدى نفسك وتطور مستواك بسرعة 🔥<br><br>
+                        أنا جمعتلك أفضل ما فيها، عشان تمسك الطريق الصح وتبقى جاهز للمستويات الأعلى 💪<br>
+                        لو خلصت شيتات الجامعات ومستعد تخرج من الـ Comfort Zone... يبقى هنا مكانك 💥
+                    </p>
+                    <button class="bottom-glass" id="soundButton3" onclick="openPopup('popup2')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound3" src="~/img/وحيتاة سيدك اللبلوبى(MP3) Music.wav" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec2.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup" id="popup2" style="display: none; direction: rtl;">
+            <div class="popup-content">
+                <button class="close-btn" onclick="closePopup('popup2')">×</button>
+                <div class="popup-flex">
+                    <h2 class="popup-acpc-title">بتطور من نفسك فى الاجازات 💪</h2>
+
+                    <div class="popup-acpc-text">
+
+                        <p>
+                            عايز تطلّع المبرمج اللي جواك للقمة؟ يبقى الكنز ده ليك! 💥<br>
+                            شيتات الكامبات الصيفية والشتوية دي مش مجرد مسائل، دي تحديات بتتعامل في أقوى الجامعات، ومصممة عشان تدفعك لمستوى أعلى بسرعة صاروخية 🚀.<br>
+                            الأسئلة هنا بتكون أصعب وأعمق، يعني لو عايز تكسر الحواجز وتتحدى نفسك بجد، دي فرصتك الذهبية! 💪<br><br>
+
+                            الكامبات دي كانت مليانة جو منافسة وتحديات خلّت كل اللي اشتركوا فيها يكتسبوا خبرات خرافية.<br>
+                            لما تشتغل على الشيتات دي، هتحس إنك عايش نفس التجربة، وهتستفيد من خبرتهم 💪.<br>
+                            هتتعلم إزاي تواجه الأسئلة اللي بتحتاج تفكير عميق، وهتبني ثقتك بنفسك عشان تكون جاهز لأي مسابقة أو تحدي جاي.<br>
+                            يعني ببساطة، لو عايز تبقى في الـ Zone بتاع الأبطال، الشيتات دي هي طريقك! 🚀<br><br>
+
+                            <strong>اللينكات بتاعة الشيتات:</strong><br><br>
+                            <a href="https://codeforces.com/group/QGpkwtKZ2a/contests" target="_blank">ICPC Assiut Winter Camp - New Comers Contests '20</a><br><br>
+                            <a href="https://codeforces.com/group/kbZwsm35Bw/contests" target="_blank">ICPC Assiut Winter Camp - Newcomers '20</a><br><br>
+                            <a href="https://codeforces.com/group/xSGyU0GW3L/contests" target="_blank">ICPC Assiut Winter Camp - Juniors Contests '20</a><br><br>
+                            <a href="https://codeforces.com/group/UZxBcPr4qR/contests" target="_blank">Juniors Summer Camp ACM Assiut</a><br><br>
+                            <a href="https://codeforces.com/group/4tce81coBy/contests" target="_blank">ICPC Assiut Winter Camp - Juniors '20</a><br><br>
+                            <a href="https://codeforces.com/group/jO72evgwio/contests" target="_blank">Semi Seniors Summer Camp ACM Assiut High Level</a><br><br>
+
+                            جاهز تتحدى نفسك وتبقى من الأقوى؟ ابدأ دلوقتي واستعد للسماء! 🌟
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--------------------- End Sec 3 ----------------------------------->
+        <!------------------- Start Sec 4 ------------------------------>
+
+        <div class="section">
+            <h2>مواقع هتساعدك تسد اى ثغرة فى مستواك 🔥</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        وقعت في مشكلة وإنت بتحل مسائل زي Arrays أو Loops ومش عارف تكمل؟ متقلقش، هنا هيبقى خطوتك للخروج من الحيرة! 💡<br><br>
+                        جمعتلك هنا مجموعة لينكات، مواقع مليانة أسئلة وتحديات على كل توبك برمجي ممكن تقابلك.<br>
+                        اللي هنا هيخلّيك تتمرن على طول وتقوي مهارتك في التوبك اللي عايزه. 🔥<br><br>
+                        كل موقع فيهم فيه أسئلة كتير وتحديات متنوعة هتساعدك تفهم التوبك بعمق وتبقى جاهز لأي سؤال يجيلك.<br>
+                        سواء كنت لسه بتبدأ أو عايز تتحدى نفسك أكتر، الروابط دي هتديك الدفعة اللي محتاجها!
+                    </p>
+                    <button class="bottom-glass" id="soundButton4" onclick="openPopup('popup7')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound4" src="~/img/ربنا يريح قلبك زى ما ريحت قلبى.wav" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec-4.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup7" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup7')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+
+                    <div class="popup-text popup-acpc-text">
+                        <h2 class="head-center">هنا هتغطى اى نقطه ضعف فى اى توبك 😊</h2>
+                        <p>
+                            سواء لسه بتبدأ، أو وقعت في النص من توبيك معين (زي <strong>Loops, Arrays, أو DP</strong>)، ومش عايز تعيد من الأول، جمعتلك هنا المواقع اللي هتساعدك تتدرب بذكاء 👨‍💻<br><br>
+
+                            ✅ المواقع دي مش بس بتشرح، لكن بتديك مسائل متقسمة بوضوح حسب التوبيك أو الريت<br>
+                            يعني لو حاسس إنك محتاج تقوي نفسك في توبيك معين، تقدر تدخل تحل على طول من غير لف أو إعادة شرح.<br><br>
+
+                            📚 <strong>أقوى مصادر Practice لأي مستوى أو توبيك:</strong><br><br>
+
+                            🔹 <strong>USACO Guide</strong><br>
+                            منظم حسب المستوى (Bronze → Plat) وكل توبيك عليه تمارين + شروحات<br>
+                            <a href="https://usaco.guide/" target="_blank">🌐 USACO Guide</a><br><br>
+
+                            🔹 <strong>CSES Sheet</strong><br>
+                            Structured sheet ممتاز، بيبدأ من الأساسيات ويوصلك لمستوى متقدم تدريجيًا<br>
+                            <a href="https://cses.fi/problemset/" target="_blank">🌐 CSES Problem Set</a><br><br>
+
+                            🔹 <strong>YOU KNOW WHO - Topic List</strong><br>
+                            لو تايه في توبيك معين، هنا هتلاقيه متقسم لمسائل مختارة ومصنفة بوضوح<br>
+                            <a href="https://youkn0wwho.academy/topic-list" target="_blank">🌐 The Ultimate Topic List</a><br><br>
+
+                            🔹 <strong>Codeforces Ladders - حسب الريت</strong><br>
+                            عايز تتمرن تدريجيًا حسب الصعوبة؟ الريت دي معمولة مخصوص ليك<br>
+                            <a href="https://c2-ladders-juol.onrender.com/" target="_blank">🌐 C2 LADDERS</a><br>
+                            <a href="https://codeforces.com/blog/entry/99896" target="_blank">🌐 CF Blog Entry</a><br><br>
+
+                            🔹 <strong>CP Circus (VJudge Group)</strong><br>
+                            لو بتحب تحل مع صحابك أو تتحدى نفسك بمسابقات متخصصة حسب التوبيك<br>
+                            <a href="https://vjudge.net/group/cp-circus" target="_blank">🌐 CP Circus</a><br><br>
+
+                            <strong>اكيد مش هننسى اشهر المواقع اللى متعودين نحل عليها:</strong><br><br>
+
+                            وخلى بالك من Codeforces لان دا بينزل عليه Dives كل اسبوع تابعها عشان تطور من مستواك   <br>
+
+                            <a href="https://codeforces.com/" target="_blank">🌐 Codeforces</a><br>
+
+                            <a href="https://leetcode.com/" target="_blank">🌐 LeetCode</a><br>
+
+                            <a href="https://www.hackerrank.com/" target="_blank">🌐 HackerRank</a><br>
+
+
+                            <a href="https://www.geeksforgeeks.org/" target="_blank">🌐 GeeksforGeeks</a><br><br>
+
+                            🧠 <strong>لو حسيت إنك وقعت في التراك... متقفش!</strong><br>
+                            ادخل على أي موقع من دول، اختار التوبيك اللي محتاج تشتغل عليه، وابدأ حل<br>
+                            هتلاقي تحديات حقيقية هترجعك فورمة بسرعة 💪
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------- End Sec 4 ------------------------------->
+        <!-- ------------ Start Sec 5-------------  finsh --------------------->
+
+        <div class="section">
+            <h2>ارشيف المسابقات 🎖️</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        لينكات، تواريخ، وسنين المسابقات كلها... يعنى الأرشيف السرى 💣<br><br>
+                        هتلاقى كمان شيتات السنين اللى فاتت للمسابقات، متقسمة بالأيام،<br>
+                        وكمان شروحات من منتورز بيحلوا المسائل وبيفهموك طريقة التفكير الصح 🧠<br><br>
+                        يعنى ببساطة... أرشيف عظمة كنا كلنا بندوّر عليه وإحنا داخلين المسابقات 👑<br>
+                        لأن وقتها بنبقى عايزين نفهم شكل الأسئلة وإيه مستوى التحدي.<br><br>
+                        وعلشان انت وصلت للكنز ده، بقى عندك فرصة تشوف كل ده قبل أى حد 🔐
+                    </p>
+                    <button class="bottom-glass" id="soundButton5" onclick="openPopup('popup3')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound5" src="~/img/_رياكشن_رياكشنات_رياكشنات_مضحكه_رياكشنز_رياكشنااااات_رياكشنات_كيبوب.mp3" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec-3.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup3" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup3')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+                    <h2 class="popup-title popup-acpc-title">وصلت للقسم دا يبقى قررت تكون حوت المسابقات 🏆</h2>
+
+                    <div class="popup-text popup-acpc-text">
+
+                        <p>
+                            لو بتدور على الكنز بتاع المسابقات البرمجية، يبقى وصلت للمكان الصح! 🔥<br><br>
+                            هنا هتشوف أرشيف كامل لمسابقات ACPC و ECPC و ICPC من سنة 2018 لحد 2024، فيه كل اللينكات المهمة لكل مسابقة.<br><br>
+                            مش بس كده، فيه شيتات السنين اللي فاتت متقسمة حسب الأيام (لـ ECPC 2024 و ICPC 2023)، وكمان لو بتدور على حلول احترافية للمسائل دي، جبتلك من أفضل المنتورز اللي بيحلوا المسائل ويفهموك طريقة التفكير الصحيحة 🧠.<br><br>
+                            يعني لو عايز تعرف شكل الأسئلة ومستوى التحدي، ده الأرشيف اللي هيخليك جاهز قبل أي حد! 🔐<br><br>
+
+                            <strong class="strong">مسابقات Kickof:</strong><br><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/526483" target="_blank">Kickof 2021</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/529544" target="_blank">Kickof 2022</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/529545" target="_blank">Kickof 2023</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/528296" target="_blank">Kickof 2024</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/604583" target="_blank">Kickof 2025</a><br><br>
+
+                            <strong class="strong">مسابقات ECPC:</strong><br><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/479241" target="_blank">ECPC 2018</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/479240" target="_blank">ECPC 2019</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/479246" target="_blank">ECPC 2020</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/526482" target="_blank">ECPC 2021</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/477878" target="_blank">ECPC 2022</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/477876" target="_blank">ECPC 2023</a><br>
+                            <a href="https://codeforces.com/contests/537316" target="_blank"><strong>ECPC 2024 :</strong><br> Day 1</a><br>
+                            <a href="https://codeforces.com/contests/537640" target="_blank">Day 2</a><br>
+                            <a href="https://codeforces.com/contests/537870" target="_blank">Day 3</a><br>
+                            <a href="https://codeforces.com/contests/538098" target="_blank">Day 4</a><br>
+                            <a href="https://codeforces.com/contests/538271" target="_blank">Day 5</a><br>
+                            <a href="https://codeforces.com/contests/538517" target="_blank">Day 6</a><br><br>
+
+                            <strong>مسابقات ACPC:</strong><br><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/479242" target="_blank">ACPC 2018</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/479250" target="_blank">ACPC 2019</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/477872" target="_blank">ACPC 2020</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/477871" target="_blank">ACPC 2021</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/477874" target="_blank">ACPC 2022</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/511452" target="_blank">ACPC 2023</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/572352" target="_blank">ACPC 2024</a><br><br>
+
+                            <strong>مسابقات ICPC:</strong><br><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/532374" target="_blank"><strong>ICPC 2023 :</strong><br>Day 1</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/534682" target="_blank">Day 2</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/532373" target="_blank">Day 3</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/530047" target="_blank">Day 4</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/530046" target="_blank">Day 5</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/532378" target="_blank">Day 6</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/530045" target="_blank">Day 7</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/530044" target="_blank">Day 8</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/530043" target="_blank">Day 9</a><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contest/484436" target="_blank">Day 10</a><br><br>
+
+                            <strong>لو عايز تبص على مسابقات اكتر :</strong><br><br>
+                            <a href="https://codeforces.com/group/Rilx5irOux/contests" target="_blank">ارشيف المسابقات</a><br><br>
+                            <strong>حلول المنتورز الاحترافية:</strong><br><br>
+                            <a href="https://www.youtube.com/playlist?list=PL68QVWcm1W8BzjG01qCsnoHE30fLhQLMb" target="_blank">قائمة تشغيل على يوتيوب</a><br><br>
+                            <!-- <a href="#" target="_blank">قناة اليوتيوب</a><br><br> -->
+                            استعد كويس وخليك جاهز للتحدي! 🚀
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--------------------End Sec 5--------  --------------------------->
+        <!-------------------- Start Sec 6 -------------------------------->
+
+        <div class="section">
+            <h2>مسابقات هتطور من مستواك 💪</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        نفسك تبقى نينجا في Problem Solving؟ المسابقات البرمجية العالمية هي بوابتك! 🌍<br>
+                        دي مش مجرد أسئلة، دي تحديات بتجمع أقوى المبرمجين من كل حتة ! <br>
+                        زي: TopCoder Challenges، Meta Hacker Cup، وIEEEXtreme.<br><br>
+                        كتير مش بيعرفوا عن المسابقات دي أو بيخافوا إنها صعبة، بس الحقيقة إنها الطريق الأسرع عشان تطلّع إمكانياتك، تحسن طريقة تفكيرك في حل المشاكل، وتبقى جاهز لأي تحدي برمجي! 🔥<br>
+                        هنا هتلاقي أهم المسابقات اللي هتساعدك تبني مهاراتك في Problem Solving وتوصل لقمة الاحتراف.<br>
+                        سواء كنت بتبدأ من الصفر أو جاهز لتحديات أقوى، المسابقات دي هتديك دفعة كبيرة وثقة عشان تكون من المميزين! 🏅<br>
+
+                    </p>
+                    <button class="bottom-glass" id="soundButton6" onclick="openPopup('popup6')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound6" src="~/img/ي لهوى ايه اللى جابك تانى.wav" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec-6.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup6" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup6')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+
+
+                    <div class="popup-text popup-acpc-text">
+                        <h2 class="head-center">اكتشف عالم المسابقات البرمجية ✈️</h2>
+                        <p>
+                            بتحب التحديات البرمجية ونفسك تكون مميز في عالم <strong>Problem Solving</strong>؟<br><br>
+
+
+                            المشكلة إن كتير من الناس مش بيسمعوا عن المسابقات دي أو بيفتكروا إنها صعبة جدًا.<br>
+                            لكن الحقيقة إنها <strong>فرصة ذهبية</strong> عشان تطور مستواك، تحسن مهاراتك في حل المشاكل، وتكتسب خبرة تخلّيك جاهز لأي تحدي برمجي! 🔥<br><br>
+
+
+                            يبقى المسابقات البرمجية الكبيرة هي طريقك! 💥<br>
+                            المسابقات دي مش مجرد تدريب، دي تحديات عالمية بتجمع أفضل المبرمجين!<br><br>
+                            سواء كنت لسه بتبدأ أو عايز تتحدى نفسك بمسائل أصعب، المسابقات دي هتديك الخبرة والثقة عشان تكون من الأبطال! 🏆<br><br>
+
+                            زي:
+                            <ul>
+                                <li><a href="https://www.topcoder.com/challenges" target="_blank">TopCoder Challenges</a></li>
+                                <li><a href="https://www.facebook.com/codingcompetitions/hacker-cup" target="_blank">Meta Hacker Cup</a></li>
+                                <li><a href="https://ieeextreme.org/" target="_blank">IEEEXtreme</a></li>
+                                <li><a href="https://sibaq.org/international/contest" target="_blank">Sibaq</a></li>
+                                <li><a href="https://techdevguide.withgoogle.com/resources/google-kick-start/" target="_blank">Google Tech Dev</a></li>
+                                <li><a href="https://ioinformatics.org/" target="_blank">IOI Competition</a></li>
+                                <a href="https://ioinformatics.org/page/contests/10" target="_blank">مسابقات السنين اللى فاتت    IOI </a>
+                                <li><a href="https://www.eoi-eg.org/about-eoi" target="_blank">EOI Competition</a></li>
+                                <a class="non" href="https://codeforces.com/group/swEqtABRxe/join" target="_blank">جروب مسابقات السنين اللى فاتت    EOI</a>
+                            </ul>
+
+                            كل مسابقة هنا هتخلّيك تكتشف إمكانياتك وتطور من نفسك.<br>
+                            يلا، جرب، تحدى نفسك، وكسّر الدنيا! 🌟
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------------------- End Sec 6 --------------------------------->
+        <!--------------------- Start Sec 7 -------------------------------->
+
+        <div class="section">
+            <h2> اختار التراك اللى يناسبك 👨‍💻</h2>
+            <div class="section-flex">
+                <div class="section-text">
+                    <p>
+                        عارف إنك ممكن تكون طالب وبتدور على طريق تمشي فيه… محتار تبدأ في إيه؟<br>
+                        Web؟ Data؟ AI؟ Embedded؟ ومش عارف أنهي تراك أنسب ليك؟ 🤔<br>
+                        ومش بس كده… حتى لو عرفت التراك، بتسأل: أبدأ منين؟ أذاكر إيه؟ أتعلم إزاى؟<br><br>
+                        وكمان، هنعرفك ليه مهارة Problem Solving مهمة جدًا مهما كان التراك اللي هتختاره. <br>لأنها هي الأساس اللي هتساعدك تحل أي مشكلة تواجهك، وتديك التفكير المنطقي اللي يخليك مميز في أي مجال!
+                        🗝️<br><br>
+
+                    </p>
+                    <button class="bottom-glass" id="soundButton7" onclick="openPopup('popup5')">جاهز تبدأ تعالى هنا 🔓</button>
+                    @* <audio id="buttonSound7" src="~/img/هجرس وفزاع.wav" preload="auto"></audio> *@
+                </div>
+                @* <div class="section-image"> *@
+                @*     <img src="~/img/sec5.jpg" alt=""> *@
+                @* </div> *@
+            </div>
+        </div>
+
+        <div class="popup popup-acpc" id="popup5" style="display: none; direction: rtl;">
+            <div class="popup-content popup-acpc-content">
+                <button class="close-btn" onclick="closePopup('popup5')">×</button>
+                <div class="popup-flex popup-acpc-flex">
+                    <h2 class="popup-title popup-acpc-title">عارف انك تايه وانا قررت اكون دليلك 🤩</h2>
+
+                    <div class="popup-text popup-acpc-text">
+
+                        <p>
+                            طالب وعايز تعرف إزاي تبدأ في عالم البرمجة؟ محتار تختار إيه؟ Web Development؟ AI؟ Cybersecurity؟ ولا Embedded Systems؟ 🤔<br><br>
+                            وحتى لو قررت التراك اللي عايزه، بتسأل نفسك: أبدأ منين؟ أتعلم إيه؟ إزاي أكون متمكن؟<br>
+                            متقلقش، أنا هنا عشان أرشدك! 🚀<br><br>
+                            جمعتلك دليل بسيط يشرحلك أشهر التراكات في عالم البرمجة، وإيه اللي يناسبك فيهم، وازاي تبدأ خطوة بخطوة عشان توصل للمستوى اللي تحلم بيه 💪.<br><br>
+                            وأهم حاجة لازم تعرفها: مهما كان التراك اللي هتختاره، مهارة <strong>Problem Solving</strong> هي المفتاح 🗝️.<br><br>
+
+                            <strong class="strong">ليه الـ Problem Solving مهمة في كل تراك؟</strong><br><br>
+
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7317894535689199616-ytu1" target="_blank">🛠️ في مجال Software Testing</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7320431229764313090-7bAP" target="_blank">🔧 في مجال DevOps</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7322952864383819778-NVzS" target="_blank">☁️ في مجال Cloud Computing</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7325459363966410752-zzp5" target="_blank">💡 في App & Web Development</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7328047211139747842-yFNT" target="_blank">🤖 في AI و Data Science</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7330567543411101696-DIgU" target="_blank">🛡️ في Cybersecurity</a><br>
+                            <a href="https://www.linkedin.com/posts/icpc-natu-community_icpcabrnatuabrcommunity-activity-7333462048917315587-zsaH" target="_blank">🎨 في UI/UX Design</a><br><br>
+
+                            <strong>💬 محتار تبدأ منين؟ اتفرج على التراكات وتعرف عليهم:</strong><br>
+                            <a href="https://t.me/whele_52_Hz" target="_blank">📌 قناة تليجرام لشرح التراكات</a><br><br>
+
+                            <strong>🎓 وده كنز الكورسات لأي تراك تختاره:</strong><br>
+                            <a href="https://t.me/Programmer_Idea" target="_blank">🎯 قناة تليجرام للكورسات</a><br><br>
+
+                            اختار التراك اللي يناسبك، ابدأ صح، وكسّر الدنيا! 💥
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------- End Sec 7 ---------------------------------->
+
+
+
+    </div>
+    <button class="fixed-button" id="soundButton" onclick="window.location.href='@Url.Action("Frist", "Home")'">Home</button>
+
+
+    <script src="~/js/page.js"></script>
+</body>
+<
+</html>

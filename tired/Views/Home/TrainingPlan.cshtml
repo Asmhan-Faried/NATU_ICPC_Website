@@ -1,0 +1,1266 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/navbar.css">
+    <link rel="stylesheet" href="~/css/quizzes.css">
+    <link rel="stylesheet" href="~/css/trainingPlanL1.css">
+
+
+    <title>Training Plan Level 1</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+    <script src="~/js/trainingPlanL1.js" asp-append-version="true" defer></script>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+
+        @@keyframes realisticBounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            10% {
+                transform: translateY(-30px);
+            }
+
+            20% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-20px);
+            }
+
+            40% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(0);
+            }
+
+            70% {
+                transform: translateY(-5px);
+            }
+
+            80% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+        <div id="errorModal" class="modal">
+            <div class="modal-content error-modal-content">
+                <span class="close-button">&times;</span>
+                <p></p> <!-- النص سيتم تعيينه بواسطة JavaScript -->
+            </div>
+        </div>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="notification error" id="errorNotification">@TempData["ErrorMessage"]</div>
+    }
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <a href="#" class="logo">
+            <img src="~/img/logo.png">
+            <h3> ICPC Community</h3>
+        </a>
+        <nav class="navbar">
+            <a href="@Url.Action("Frist","Home")">Home</a>
+            @if (ViewBag.CurrentUserLevel == 2)
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")">Level 2</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Mentors", "Home")">Mentors</a>
+            <a href="@Url.Action("Index", "Contact")">Contact Us</a>
+           
+
+
+        </nav>
+
+        <div class="icons">
+            <a href="@Url.Action("EditProfile", "Account")">
+                <img src="~/img/user.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+            <a href="@Url.Action("Logout", "Account")">
+                <img class="logout" src="~/img/logout.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+        </div>
+
+    </header>
+
+    <!-- Start Projects -->
+
+    <section class="projects week1" id="Projects">
+        <h2 class="heading">Week 1</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-1"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-1">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/sqIQjgTYys8"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-2"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-2">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/NVwUSvelcIo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid3.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-3"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-3">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/bEbNYkEphL4"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+            <!-- Start Box 4 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid4.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-4"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 4 -->
+                <div class="video-popup" data-popup="project-4">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YcRMNzLTIfg"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 4 -->
+            <!-- Start Box 5 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid5.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-5"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 5 -->
+                <div class="video-popup" data-popup="project-5">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YS1v0-wifg8"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 5 -->
+            <!-- Start Box 6 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid6.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-6"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 6 -->
+                <div class="video-popup" data-popup="project-6">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EN1kX4HIPgs"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 6 -->
+            <!-- Start Box 7 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid7.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-7"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 7 -->
+                <div class="video-popup" data-popup="project-7">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/I11mfEdfh-4"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 7 -->
+            <!-- Start Box 8 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid8.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-8"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 8 -->
+                <div class="video-popup" data-popup="project-8">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ncwIeshX7Kk"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 8 -->
+            <!-- Start Box 9 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid9.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-9"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 9 -->
+                <div class="video-popup" data-popup="project-9">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/qmHE9QISuVQ"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 9 -->
+            <!-- Start Box 10 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid10.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-10"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 10 -->
+                <div class="video-popup" data-popup="project-10">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/jJVaDl_dePk"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 10 -->
+            <!-- Start Box 11 -->
+            <div class="projects-box">
+                <img src="~/img/week1 vid11.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-11"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 11 -->
+                <div class="video-popup" data-popup="project-11">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/xmjB7u7mHWE"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 11 -->
+
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/1 - DataType and Conditions.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/Week 1  Blog.pdf" class="view-button" target="_blank">File 2</a>
+            <a href="~/files/1-Data-type && conditions.pdf" class="view-button" target="_blank">File 3</a>
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/219158">Sheet 1</a>
+        </div>
+
+    </section>
+
+    <!-- End Projects -->
+
+    <section class="projects week2" id="Projects">
+        <h2 class="heading">Week 2</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-12"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-12">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/qVBi98-XJ3s"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-13"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-13">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/yjzB3-CxWmE"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-14"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-14">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/yLNNnX59jO8"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+            <!-- Start Box 4 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-15"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 4 -->
+                <div class="video-popup" data-popup="project-15">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/LsBZvL4-KuE"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 4 -->
+            <!-- Start Box 5 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-16"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 5 -->
+                <div class="video-popup" data-popup="project-16">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_kjcb7w220c"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 5 -->
+            <!-- Start Box 6 -->
+            <div class="projects-box">
+                <img src="~/img/week 2 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-17"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 6 -->
+                <div class="video-popup" data-popup="project-17">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/mNotKsNLyxo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 6 -->
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/Loops.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/Week  2 Blog.pdf" class="view-button" target="_blank">File 2</a>
+            <a href="~/files/2-Loops.pdf" class="view-button" target="_blank">File 3</a>
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/219432">Sheet 2</a>
+        </div>
+
+    </section>
+
+    <section class="projects week3" id="Projects">
+        <h2 class="heading">Week 3</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-18"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-18">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/0HT2-2qD654"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-19"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-19">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/38l7MZbUZdM"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-20"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-20">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/205MJC3klII"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+            <!-- Start Box 4 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-21"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 4 -->
+                <div class="video-popup" data-popup="project-21">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/GoqfS1m1BYo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 4 -->
+            <!-- Start Box 5 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-22"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 5 -->
+                <div class="video-popup" data-popup="project-22">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/rxKcqvbWkL0"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 5 -->
+            <!-- Start Box 6 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-23"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 6 -->
+                <div class="video-popup" data-popup="project-23">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZKE4VZHS9IY"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 6 -->
+            <!-- Start Box 7 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 3.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-24"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 7 -->
+                <div class="video-popup" data-popup="project-24">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/-GxY9NCG9Bw"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 7 -->
+            <!-- Start Box 8 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 3.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-25"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 8 -->
+                <div class="video-popup" data-popup="project-25">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/rUDC13pfB5E"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 8 -->
+            <!-- Start Box 9 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 3.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-26"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 9 -->
+                <div class="video-popup" data-popup="project-26">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/GUJlDqIMFVA"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 9 -->
+            <!-- Start Box 10 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 4.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-27"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 10 -->
+                <div class="video-popup" data-popup="project-27">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/qrwupQ2_iJo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 10 -->
+            <!-- Start Box 11 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 5.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-28"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 11 -->
+                <div class="video-popup" data-popup="project-28">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/fQwD4-FxQBU"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 11 -->
+            <!-- Start Box 12 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 6.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-29"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 12 -->
+                <div class="video-popup" data-popup="project-29">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/kQGTjql8WjI"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 12 -->
+            <!-- Start Box 13 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 7.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-30"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 13 -->
+                <div class="video-popup" data-popup="project-30">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EnodMqJuQEo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 13 -->
+            <!-- Start Box 14 -->
+            <div class="projects-box">
+                <img src="~/img/week3 vid 7.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-31"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 14 -->
+                <div class="video-popup" data-popup="project-31">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/pIEGHDZHOCk"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 14 -->
+
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/3-Arrays 1.pptx.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/4-Arrays 2.pptx.pdf" class="view-button" target="_blank">File 2</a>
+            <a href="~/files/Week 3 Blog.pdf" class="view-button" target="_blank">File 3</a>
+            <a href="https://github.com/AhmedEzzatG/competitiveProgramming/blob/master/newcomers/difference%20between%20subarray%20and%20subsequence.md" class="view-button" target="_blank">File 4</a>
+            <a href="files/3-Array.pdf" class="view-button" target="_blank">File 5</a>
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/219158">Sheet 3</a>
+        </div>
+
+    </section>
+
+    <section class="projects week4" id="Projects">
+        <h2 class="heading">Week 4</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week 4 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-32"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-32">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/GoqfS1m1BYo"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week 4 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-33"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-33">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/rxKcqvbWkL0"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week 4 vid 1.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-34"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-34">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZKE4VZHS9IY"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+            <!-- Start Box 4 -->
+            <div class="projects-box">
+                <img src="~/img/week 4 vid 2.jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-35"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 4 -->
+                <div class="video-popup" data-popup="project-35">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/RCz81Q8kDPU"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 4 -->
+
+
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/5 - String.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/4-Strings.pdf" class="view-button" target="_blank">File 2</a>
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/219856">Sheet 4</a>
+        </div>
+    </section>
+    <section class="projects week5" id="Projects">
+        <h2 class="heading">Week 5</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week 5 (1).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-36"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-36">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/z61hvizsrZs"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week 5 (2).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-37"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-37">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ksh0QLTaWt0"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week 5 (3).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-38"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-38">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Lu3z4rfU-2s"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+
+
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/#5-Functions.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/6 - Functions.pdf" class="view-button" target="_blank">File 2</a>
+
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/223205">Sheet 5</a>
+        </div>
+
+    </section>
+    <section class="projects week6" id="Projects">
+        <h2 class="heading">Week 6</h2>
+
+        <div class="project-container">
+            <!-- Start Box 1 -->
+            <div class="projects-box">
+                <img src="~/img/week6 (5).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-39"></i>
+                    </div>
+                </div>
+
+                <div class="video-popup" data-popup="project-39">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Scw9LAtuwvg"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Box 1 -->
+            <!-- Start Box 2 -->
+            <div class="projects-box">
+                <img src="~/img/week6 (4).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-40"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 2 -->
+                <div class="video-popup" data-popup="project-40">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/JS-0DOGrNmo?list=PLR5x_RGTMNNX6KCXeA9Fj-xNLzt9bi3eL"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 2 -->
+            <!-- Start Box 3 -->
+            <div class="projects-box">
+                <img src="~/img/week6 (3).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-41"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 3 -->
+                <div class="video-popup" data-popup="project-41">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/O4WljSHt27w?list=PLR5x_RGTMNNX6KCXeA9Fj-xNLzt9bi3eL"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 3 -->
+            <!-- Start Box 4 -->
+            <div class="projects-box">
+                <img src="~/img/week6 (2).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-42"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 4 -->
+                <div class="video-popup" data-popup="project-42">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/DWaor1rGxog?list=PLR5x_RGTMNNX6KCXeA9Fj-xNLzt9bi3eL"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 4 -->
+            <!-- Start Box 5 -->
+            <div class="projects-box">
+                <img src="~/img/week6 (1).jpg">
+                <div class="hover-items">
+                    <div class="icons">
+                        <i class='bx bx-video video-btn' data-video="project-43"></i>
+                    </div>
+                </div>
+
+                <!-- Popup structure for video 5 -->
+                <div class="video-popup" data-popup="project-43">
+                    <div class="popup-content">
+                        <span class="close-vid">&times;</span>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/si-Tk_C0nIQ?list=PLR5x_RGTMNNX6KCXeA9Fj-xNLzt9bi3eL"
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- End Box 5 -->
+
+
+        </div>
+
+        <div class="button-container">
+            <a href="~/files/7 - Math.pdf" class="view-button" target="_blank">File 1</a>
+            <a href="~/files/#6-Maths.pdf" class="view-button" target="_blank">File 2</a>
+            <a href="https://www.mathsisfun.com/geometry/index.html" class="view-button" target="_blank">geometry</a>
+            <a href="https://cutt.ly/0fldBiC" class="view-button" target="_blank">Basic Math Function</a>
+
+        </div>
+
+        <div class="bottom">
+            <a target="_blank" href="https://codeforces.com/group/MWSDmqGsZm/contest/223338">Sheet 6</a>
+        </div>
+
+    </section>
+
+    <button class="fixed-button" id="soundButton" onclick="window.location.href='@Url.Action("page", "Home")'">Come her</button>
+
+
+    <script src="~/js/app.js"></script>
+    <script src="~/js/trainingPlanL1.js"></script>
+    <script>
+            var currentUserLevel = @((ViewBag.CurrentUserLevel ?? 0));
+    function checkLevel(event) {
+        var requiredLevel = parseInt(event.currentTarget.dataset.levelRequired);
+        if (currentUserLevel < requiredLevel) {
+            event.preventDefault();
+            var modal = document.getElementById("errorModal");
+            var modalMessage = modal.querySelector("p");
+            modalMessage.textContent = "Access to this content is restricted. Please complete the Level 1 quiz to unlock Level 2.";
+            modal.style.display = "flex";
+            return false;
+        }
+        return true;
+    }
+             function checkLevel(event) {
+            // جلب مستوى المستخدم الحالي من ViewBag (يجب أن يكون متاحًا في الـ View)
+            // تأكدي أن ViewBag.CurrentUserLevel يتم تمريره من الـ Controller الذي يعرض هذا الـ View
+            var currentUserLevel = @(ViewBag.CurrentUserLevel ?? 0); // استخدمي 0 كقيمة افتراضية إذا كان null
+
+            var requiredLevel = parseInt(event.currentTarget.dataset.levelRequired); // جلب المستوى المطلوب من data-level-required
+
+            if (currentUserLevel < requiredLevel) {
+                event.preventDefault(); // منع الانتقال إلى الرابط
+
+                // عرض النافذة المنبثقة
+                var modal = document.getElementById("errorModal");
+                var modalMessage = modal.querySelector("p");
+
+                modalMessage.textContent = "Access to this content is restricted. Please complete the Level 1 quiz to unlock Level 2.";
+                modal.style.display = "flex"; // Show the modal
+
+                // يمكنكِ أيضًا تعيين TempData["ErrorMessage"] هنا إذا كنتِ تريدين
+                // ولكن بما أننا نستخدم JavaScript، فليس ضروريًا.
+                return false; // منع الحدث الافتراضي للرابط
+            }
+            return true; // السماح بالانتقال إلى الرابط
+        }
+
+        // كود النافذة المنبثقة الذي قدمته لكِ سابقًا
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('errorModal');
+            var span = document.getElementsByClassName('close-button')[0];
+
+            if (modal) {
+                // لا تظهريها تلقائيًا هنا، بل دعي دالة checkLevel تتحكم في ذلك
+                // modal.style.display = 'flex';
+
+                span.onclick = function() {
+                    modal.style.display = 'none';
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            }
+        });
+
+                   const soundButton = document.getElementById('soundButton');
+            const buttonSound = document.getElementById('buttonSound');
+
+            soundButton.addEventListener("mouseenter", () => {
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+            });
+
+            soundButton.addEventListener("click", () => {
+                buttonSound.currentTime = 0;
+                buttonSound.play();
+
+                // فتح صفحة باستخدام Razor URL
+                setTimeout(() => {
+                    window.location.href = '@Url.Action("page", "Home")';
+                }, 500);
+            });
+
+    </script>
+</body>

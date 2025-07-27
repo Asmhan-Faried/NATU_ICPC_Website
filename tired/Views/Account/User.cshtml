@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+}
+@model dynamic
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Form</title>
+    <link rel="stylesheet" href="~/css/login.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<style>
+    .text-danger {
+        display: block;
+        color: #de1b10;
+        margin: 8px;
+        font-size: 17px;
+    }
+</style>
+<body>
+    <div class="container @(ViewBag.Mode == "signup" ? "active" : "")">
+        <!-- Login Form -->
+        <div class="form-box login">
+            <form asp-controller="Login" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="email" name="Email" placeholder="Email" required>
+                    <i class="bx bxs-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="Password" placeholder="Password" required>
+                    <i class="bx bx-show toggle-password"></i>
+                </div>
+                <a href="@Url.Action("ForgotPassword", "Account")">Forget Password ?</a>
+                @if (ViewBag.Mode == "login")
+                {
+                    <div class="text-danger">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                }
+                <button type="submit" class="btn">Login</button>
+                @if (ViewBag.Mode == "login" && ViewBag.ErrorMessage != null)
+                {
+                    <p class="error-message">@ViewBag.ErrorMessage</p>
+                }
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="form-box register">
+            <form asp-controller="Account" asp-action="Signup2" method="post">
+                @Html.AntiForgeryToken()
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input type="text" name="Name" placeholder="Full Name" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="Email" placeholder="Email" required>
+                    <i class="bx bxs-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="Password" placeholder="Password" required
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%^&*])[A-Za-z\d!#$%^&*]{8,}$"
+                           oninvalid="this.setCustomValidity('The password must contain at least 8 characters, including an uppercase letter, a lowercase letter, a number, and a special symbol.')"
+                           oninput="this.setCustomValidity('')">
+                    <i class="bx bx-show toggle-password"></i>
+                </div>
+                <div class="input-box">
+                    @Html.DropDownList("Level", new SelectList(new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Level 1", Value = "1" },
+                    new SelectListItem { Text = "Level 2", Value = "2" }
+                    }, "Value", "Text"), "Choose Your Level", new { @class = "input" })
+                    @if (ViewBag.Errors != null && ViewBag.Errors["Level"] != null)
+                    {
+                        <span class="text-danger">@ViewBag.Errors["Level"]</span>
+                    }
+                </div>
+                @if (ViewBag.Mode == "signup")
+                {
+                    <div class="text-danger">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                }
+                <button type="submit" class="btn">Register</button>
+                @if (ViewBag.Mode == "signup" && ViewBag.ErrorMessage != null)
+                {
+                    <p class="error-message">@ViewBag.ErrorMessage</p>
+                }
+            </form>
+        </div>
+
+        <!-- Toggle Panels -->
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't have an account?</p>
+                <button class="btn register-btn">Register</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/login.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+                    const container = document.querySelector('.container');
+                    const urlParams = new URLSearchParams(window.location.search);
+                   const mode = '@ViewBag.Mode' || new URLSearchParams(window.location.search).get('mode');
+               if (mode === 'signup') {
+                   container.classList.add('active');
+               } else {
+                   container.classList.remove('active');
+               }
+
+               });
+         const togglePasswordIcons = document.querySelectorAll('.toggle-password');
+            togglePasswordIcons.forEach((icon) => {
+                icon.addEventListener('click', () => {
+                    const input = icon.parentElement.querySelector('input[name="Password"]');
+                    if (input) {
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                            icon.classList.remove('bx-show');
+                            icon.classList.add('bx-hide');
+                        } else {
+                            input.type = 'password';
+                            icon.classList.remove('bx-hide');
+                            icon.classList.add('bx-show');
+                        }
+                    }
+                });
+            });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+</body>

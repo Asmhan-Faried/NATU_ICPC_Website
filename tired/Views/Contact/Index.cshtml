@@ -1,0 +1,433 @@
+﻿@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="~/css/contact.css">
+    <link rel="stylesheet" href="~/css/navbar.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #2c3e50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .btn:hover {
+                background: #1a252f;
+            }
+
+        /* Styling for Notification Messages */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateY(-20px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            .notification.success {
+                background: #4caf50;
+                color: #fff;
+            }
+
+            .notification.error {
+                background: #f44336;
+                color: #fff;
+            }
+
+            .notification.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .modal {
+            display: none; /* Hidden by default */
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+        @@keyframes realisticBounce {
+            0%
+
+        {
+            transform: translateY(0);
+        }
+
+        10% {
+            transform: translateY(-30px);
+        }
+
+        20% {
+            transform: translateY(0);
+        }
+
+        30% {
+            transform: translateY(-20px);
+        }
+
+        40% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(0);
+        }
+
+        70% {
+            transform: translateY(-5px);
+        }
+
+        80% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div id="errorModal" class="modal">
+        <div class="modal-content error-modal-content">
+            <span class="close-button">&times;</span>
+            <p></p> <!-- النص سيتم تعيينه بواسطة JavaScript -->
+        </div>
+    </div>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="notification error" id="errorNotification">@TempData["ErrorMessage"]</div>
+    }
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <a href="#" class="logo">
+            <img src="~/img/logo.png">
+            <h3> ICPC Community</h3>
+        </a>
+        <nav class="navbar">
+
+            <a href="@Url.Action("Frist","Home")">Home</a>
+            @if (ViewBag.CurrentUserLevel == 2)
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")">Level 2</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Mentors", "Home")">Mentors</a>
+            <a href="@Url.Action("Index", "Contact")">Contact Us</a>
+            
+        </nav>
+
+        <div class="icons">
+            <a href="@Url.Action("EditProfile", "Account")">
+                <img src="~/img/user.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+            <a href="@Url.Action("Logout", "Account")">
+                <img class="logout" src="~/img/logout.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+        </div>
+
+
+    </header>
+
+    <div class="container">
+        <span class="big-circle"></span>
+        <div class="form">
+            <div class="contact-info">
+                <h3 class="title">Let's get in touch</h3>
+                <p class="text">
+                    Have questions about our university’s ICPC Community?<br><br> We’re here to help!
+                    Feel free to reach out via email or connect with us on social media. <br><br>
+                    Join us and get ready for exciting programming challenges and competitions!
+                </p>
+
+                <div class="info">
+                    <div class="information">
+                        <img src="img/ᴀᴘᴘʟᴇ ᴍᴀᴘs.jpeg" class="icon" alt="" />
+                        <p>Egypt-Assuit-Assuit center</p>
+                    </div>
+                    <div class="information">
+                        <img src="img/Icon google.jpeg" class="icon" alt="" />
+                        <p>icpcnatucommunity@gmail.com</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="contact-form">
+                <span class="circle one"></span>
+                <span class="circle two"></span>
+
+                <form  autocomplete="off" method="post">
+                    @Html.AntiForgeryToken()
+                    <h3 class="title">Contact us</h3>
+
+                    <div class="input-container">
+                        <input type="email" name="email" class="input" required />
+                        <label for="">Email</label>
+                        <span>Email</span>
+                    </div>
+
+                    <div class="input-container textarea">
+                        <textarea name="message" class="input" required></textarea>
+                        <label for="">Message</label>
+                        <span>Message</span>
+                    </div>
+                    <input type="submit" value="Send" class="btn" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <button class="fixed-button" id="soundButton">Come her</button>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="notification success" id="successNotification">@TempData["SuccessMessage"]</div>
+    }-->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="notification error" id="errorNotification">@TempData["ErrorMessage"]</div>
+    }
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+         const inputs = document.querySelectorAll(".input");
+         function focusFunc() {
+             let parent = this.parentNode;
+             parent.classList.add("focus");
+         }
+         function blurFunc() {
+             let parent = this.parentNode;
+             if (this.value == "") {
+                 parent.classList.remove("focus");
+             }
+         }
+         inputs.forEach((input) => {
+             input.addEventListener("focus", focusFunc);
+             input.addEventListener("blur", blurFunc);
+         });
+
+         function showAndHideNotification(elementId) {
+             const notification = document.getElementById(elementId);
+             if (notification) {
+                 notification.classList.add("show");
+                 setTimeout(() => {
+                     notification.classList.remove("show");
+                 }, 3000); 
+             }
+         }
+
+         showAndHideNotification("errorNotification");
+                 AOS.init( );
+
+        // JavaScript for the modal
+        var modal = document.getElementById("errorModal");
+        var span = document.getElementsByClassName("close-button")[0];
+        var modalText = modal.querySelector("p");
+
+        function showErrorModal(message) {
+            if (modal && modalText && message && message.trim() !== "") {
+                modalText.textContent = message;
+                modal.style.display = "flex";
+            }
+        }
+
+        if (span) {
+            span.onclick = function() {
+                if (modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                if (modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        function checkLevel(event) {
+                console.log("checkLevel called");
+            var targetElement = event.currentTarget;
+        var levelRequired = parseInt(targetElement.getAttribute('data-level-required'));
+                var currentUserLevel = parseInt('@(ViewBag.CurrentUserLevel ?? 0)');
+
+            if (isNaN(currentUserLevel)) {
+                currentUserLevel = 0;
+            }
+
+            if (currentUserLevel < levelRequired) {
+                event.preventDefault();
+                showErrorModal("Access to this content is restricted. Please complete the Level 1 quiz to unlock Level 2.");
+                return false;
+            }
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = @(ViewBag.ErrorMessage != null ? Html.Raw(System.Text.Json.JsonSerializer.Serialize((string)ViewBag.ErrorMessage)) : Html.Raw("null"));
+            if (errorMessage && errorMessage !== "null") {
+                showErrorModal(errorMessage);
+            }
+
+            var successMessage = @(TempData["SuccessMessage"] != null ? Html.Raw(System.Text.Json.JsonSerializer.Serialize((string)TempData["SuccessMessage"])) : Html.Raw("null"));
+            if (successMessage && successMessage !== "null") {
+                showErrorModal(successMessage);
+            }
+        });
+
+               const soundButton = document.getElementById('soundButton');
+        const buttonSound = document.getElementById('buttonSound');
+
+        soundButton.addEventListener("mouseenter", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+        });
+
+        soundButton.addEventListener("click", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+
+            // فتح صفحة باستخدام Razor URL
+            setTimeout(() => {
+                window.location.href = '@Url.Action("page", "Home")';
+            }, 500);
+        });
+
+    </script>
+
+ 
+    <script src="~/js/app.js"></script>
+</body>

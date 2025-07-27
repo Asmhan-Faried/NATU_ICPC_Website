@@ -1,0 +1,369 @@
+﻿@using System.Text.Json;
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentors</title>
+    <link rel="stylesheet" href="~/css/mentors.css">
+    <link rel="stylesheet" href="~/css/navbar.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+        @@keyframes realisticBounce {
+            0%
+
+        {
+            transform: translateY(0);
+        }
+
+        10% {
+            transform: translateY(-30px);
+        }
+
+        20% {
+            transform: translateY(0);
+        }
+
+        30% {
+            transform: translateY(-20px);
+        }
+
+        40% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(0);
+        }
+
+        70% {
+            transform: translateY(-5px);
+        }
+
+        80% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="errorModal" class="modal">
+        <div class="modal-content error-modal-content">
+            <span class="close-button">&times;</span>
+            <p></p> <!-- النص سيتم تعيينه بواسطة JavaScript -->
+        </div>
+    </div>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="notification error" id="errorNotification">@TempData["ErrorMessage"]</div>
+    }
+
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <a href="#" class="logo">
+            <img src="~/img/logo.png">
+            <h3> ICPC Community</h3>
+        </a>
+        <nav class="navbar">
+
+            <a href="@Url.Action("Frist","Home")">Home</a>
+            @if (ViewBag.CurrentUserLevel == 2)
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")">Level 2</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Mentors", "Home")">Mentors</a>
+            <a href="@Url.Action("Index", "Contact")">Contact Us</a>
+           
+        </nav>
+
+        <div class="icons">
+            <a href="@Url.Action("EditProfile", "Account")">
+                <img src="~/img/user.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+            <a href="@Url.Action("Logout", "Account")">
+                <img class="logout" src="~/img/logout.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+        </div>
+
+
+    </header>
+    <div class="icpc">
+        <img src="~/img/icpc 2.jpeg" alt="">
+        <h2 class="heading">Mentors</h2>
+    </div>
+
+
+    <div class="card">
+        <div class="content">
+            <h2>Mohamed Mahmoud Abd El-wahab</h2>
+            <p class="author">Faculty of Computers and Artificial Intelligence , Cairo University</p>
+            <p>
+                Mohamed Abdel Wahab, an Egyptian with a physical disability, graduated with honors from the Faculty of Computers and Artificial Intelligence at Cairo University and became a lecturer there.
+                In 2021, he won the "Senior Coach Award" at the global programming competition "ICPC", ranking among the top 100 programming coaches worldwide and the best in the Arab world. This award has been granted to only 19 people in 70 years, making him the first Arab to achieve it.
+                Driven by a passion for programming since childhood, Abdel Wahab overcame challenges to excel in his field, becoming a global role model of resilience and determination.
+            </p>
+
+        </div>
+        <div class="image">
+            <img src="~/img/محمد عبد الوهاب.png" alt="Speaker Image">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content">
+            <h2>Dr. Moustafa Saad</h2>
+            <p class="author">
+                Dr. Mostafa Saad is an Egyptian software engineer and competitive programmer known for his work in artificial intelligence and computer vision. He earned his Ph.D. in computer vision from Simon Fraser University in Canada. He has previously worked at Nvidia as a developer of computer vision technologies and was part of the team that reached the finals of the ICPC programming competition in 2011 while at Huawei.<br>
+
+                In addition to his academic and professional work, Dr. Mostafa Saad offers online courses in programming and AI. He shares educational content on his YouTube channel and provides consultations and training programs in the same fields. He is also active on platforms like Udemy and GitHub, where he shares his knowledge and expertise with students and developers.
+        </div>
+        <div class="image">
+            <img src="~/img/safy.jpeg" alt="Speaker Image">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content">
+            <h2>Hussein Ibrahim </h2>
+            <p class="author">
+                Hussein Ibrahim is recognized as one of the leading coaches in competitive programming across the Arab world. He has played a key role in mentoring student teams, helping them qualify for international competitions like ICPC. A graduate of Assiut University with a degree in Computer Science, he started as a contestant before transitioning into coaching.
+
+                Thanks to his dedication, Assiut University's "Dream Team" secured a spot in the global competition in 2024. He has also supported various other teams in achieving remarkable results on national and regional levels. Beyond coaching, he is passionate about conducting workshops and training sessions to enhance students' analytical thinking and problem-solving skills.
+
+                Although there is no confirmed information about his affiliation with Microsoft, Hussein remains a prominent figure in programming education, continuously empowering young talents to hone their skills and compete on a global scale.
+            </p>
+
+        </div>
+        <div class="image">
+            <img src="~/img/حسين ابراهيم.jpg" alt="Speaker Image">
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="content">
+            <h2>Mohamed Anany</h2>
+            <p class="author">
+                Coach Mohamed Anany is a prominent figure in competitive programming in Egypt and the Arab world. He is known for his achievements as a competitive programmer and his deep expertise in algorithms and data structures.
+
+                Beyond his personal success, he is passionate about training and mentoring aspiring programmers. He organizes workshops and training camps to help participants develop their skills and prepare for global competitions like ACM ICPC and Google Code Jam.
+
+                He also contributes to the programming community by sharing resources and creating educational content, emphasizing the importance of competitive programming in developing critical thinking and problem-solving skills. Thanks to his efforts, many programmers have advanced from beginner to expert levels and achieved success in the field.
+            </p>
+
+        </div>
+        <div class="image">
+            <img src="~/img/Mohamed Anany.jpg" alt="Speaker Image">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content">
+            <h2>Kareem Khaled</h2>
+            <p class="author">
+                Kareem Khaled is a distinguished competitive programming coach from Assiut, known for his passion for teaching programming and training students to tackle problems with innovative solutions. He began his journey as a contestant in programming competitions during his university years before transitioning into coaching after gaining extensive experience.
+
+                He has played a key role in preparing teams for both local and international competitions, helping his students achieve outstanding results in contests like ICPC. Additionally, he actively participates in organizing training camps designed to enhance analytical thinking and problem-solving skills.
+
+                Beyond coaching, Kareem Khaled possesses expertise in advanced programming, making him an inspiration for aspiring programmers. His contributions are shaping a new generation of competitive coders capable of excelling on a global scale.
+
+            </p>
+
+        </div>
+        <div class="image">
+            <img src="~/img/Kareem Khaled.jpg" alt="Speaker Image">
+        </div>
+    </div>
+
+    <button class="fixed-button" id="soundButton" onclick="window.location.href='@Url.Action("page", "Home")'">Come her</button>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="~/js/app.js"></script>
+    <script>
+        AOS.init( );
+
+        // JavaScript for the modal
+        var modal = document.getElementById("errorModal");
+        var span = document.getElementsByClassName("close-button")[0];
+        var modalText = modal.querySelector("p");
+
+        function showErrorModal(message) {
+            if (modal && modalText && message && message.trim() !== "") {
+                modalText.textContent = message;
+                modal.style.display = "flex";
+            }
+        }
+
+        if (span) {
+            span.onclick = function() {
+                if (modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                if (modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        function checkLevel(event) {
+                console.log("checkLevel called");
+            var targetElement = event.currentTarget;
+        var levelRequired = parseInt(targetElement.getAttribute('data-level-required'));
+                var currentUserLevel = parseInt('@(ViewBag.CurrentUserLevel ?? 0)');
+
+            if (isNaN(currentUserLevel)) {
+                currentUserLevel = 0;
+            }
+
+            if (currentUserLevel < levelRequired) {
+                event.preventDefault();
+                showErrorModal("Access to this content is restricted. Please complete the Level 1 quiz to unlock Level 2.");
+                return false;
+            }
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = @(ViewBag.ErrorMessage != null ? Html.Raw(System.Text.Json.JsonSerializer.Serialize((string)ViewBag.ErrorMessage)) : Html.Raw("null"));
+            if (errorMessage && errorMessage !== "null") {
+                showErrorModal(errorMessage);
+            }
+
+            var successMessage = @(TempData["SuccessMessage"] != null ? Html.Raw(System.Text.Json.JsonSerializer.Serialize((string)TempData["SuccessMessage"])) : Html.Raw("null"));
+            if (successMessage && successMessage !== "null") {
+                showErrorModal(successMessage);
+            }
+        });
+
+                const soundButton = document.getElementById('soundButton');
+        const buttonSound = document.getElementById('buttonSound');
+
+        soundButton.addEventListener("mouseenter", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+        });
+
+        soundButton.addEventListener("click", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+
+            // فتح صفحة باستخدام Razor URL
+            setTimeout(() => {
+                window.location.href = '@Url.Action("page", "Home")';
+            }, 500);
+        });
+
+    </script>
+
+</body>

@@ -1,0 +1,498 @@
+﻿@model tired.Models.EditProfileModel
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="~/css/settings.css" />
+    <link rel="stylesheet" href="~/css/navbar.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+
+    <style>
+        .container {
+            padding-top: 6rem;
+        }
+        /* Add these styles for the result message */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: #fff;
+            display: none;
+            z-index: 1000;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .toast.success {
+                background-color: #28a745;
+            }
+
+            .toast.error {
+                background-color: #dc3545;
+            }
+
+            .toast.show {
+                display: block;
+                animation: slideIn 0.5s ease forwards;
+            }
+
+        .text-danger {
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+            color: #ff0000;
+        }
+        .quiz-result-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+            .quiz-result-message.success {
+                background-color: #d4edda; /* Light green */
+                color: #155724; /* Dark green */
+                border: 1px solid #c3e6cb;
+            }
+
+            .quiz-result-message.error {
+                background-color: #f8d7da; /* Light red */
+                color: #721c24; /* Dark red */
+                border: 1px solid #f5c6cb;
+            }
+
+        .modal {
+            display: none; /* Hidden by default */
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+
+        @@keyframes realisticBounce {
+            0%
+
+        {
+            transform: translateY(0);
+        }
+
+        10% {
+            transform: translateY(-30px);
+        }
+
+        20% {
+            transform: translateY(0);
+        }
+
+        30% {
+            transform: translateY(-20px);
+        }
+
+        40% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(0);
+        }
+
+        70% {
+            transform: translateY(-5px);
+        }
+
+        80% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+
+        }
+    </style>
+    </head>
+    <body>
+        <div id="errorModal" class="modal">
+            <div class="modal-content error-modal-content">
+                <span class="close-button">&times;</span>
+                <p></p> <!-- النص سيتم تعيينه بواسطة JavaScript -->
+            </div>
+        </div>
+            @if (TempData["ErrorMessage"] != null)
+            {
+            <div class="notification error" id="errorNotification">@TempData["ErrorMessage"]</div>
+            }
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <a href="#" class="logo">
+            <img src="~/img/logo.png">
+            <h3> ICPC Community</h3>
+        </a>
+        <nav class="navbar">
+
+            <a href="@Url.Action("Frist","Home")">Home</a>
+            @if (ViewBag.CurrentUserLevel == 2)
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")">Level 2</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")" onclick="return checkLevel(event);" data-level-required="2" title="Access restricted to Level 2 users.">
+                            Level 2 🔒
+                        </a>
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Mentors", "Home")">Mentors</a>
+            <a href="@Url.Action("Index", "Contact")">Contact Us</a>
+        </nav>
+
+        <div class="icons">
+            <a href="@Url.Action("EditProfile", "Account")">
+                <img src="~/img/user.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+            <a href="@Url.Action("Logout", "Account")">
+                <img class="logout" src="~/img/logout.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+        </div>
+
+
+    </header>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="toast success" id="successToast">
+            <i class='bx bx-check-circle'></i>
+            <span>@ViewBag.SuccessMessage</span>
+        </div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="toast error" id="errorToast">
+            <i class='bx bx-error-circle'></i>
+            <span>@ViewBag.ErrorMessage</span>
+        </div>
+    }
+    @if (TempData["QuizMessage"] != null)
+    {
+        <div class="toast @(TempData["QuizMessageType"]?.ToString().ToLower())" id="quizToast">
+            <i class='bx @(TempData["QuizMessageType"]?.ToString().ToLower() == "success" ? "bx-check-circle" : "bx-error-circle")'></i>
+            <span>@TempData["QuizMessage"]</span>
+        </div>
+    }
+
+    <div class="container">
+        <span class="big-circle"></span>
+        <img src="~/img/shap.jpg" class="square" alt="" />
+        <div class="form">
+            <div class="contact-info">
+                <h3 class="title">Change the picture</h3>
+                <div class="avatar-section">
+                    <img src="@(Model.AvatarUrl ?? "/img/avatar.jpg")" class="avatar" id="avatar-preview" />
+                    <div class="mt-3">
+                        <label for="avatar" class="btnm btn-primary">Upload Image</label>
+                        <input type="file" id="avatar" name="Avatar" accept="image/*" onchange="previewAvatar()" style="display: none;" />
+                    </div>
+                    
+                </div>
+                <p style ="text-align: center;">Current User Level : @ViewBag.CurrentUserLevel</p>
+                @if (ViewBag.Message != null)
+                {
+                    <div class="quiz-result-message @ViewBag.MessageType">
+                        @ViewBag.Message
+                    </div>
+                }
+            </div>
+
+            <div class="contact-form">
+                <span class="circle one"></span>
+                <span class="circle two"></span>
+
+                <form asp-action="EditProfile" asp-controller="Account" method="post" enctype="multipart/form-data" id="editProfileForm">
+                    <h3 class="title">Edit Profile</h3>
+                    <input type="hidden" asp-for="Id" />
+
+                    <input type="file" id="hiddenAvatar" name="Avatar" style="display: none;" />
+
+                    <div class="input-container" focus>
+                        <label for="Email" class="border-label">Email</label>
+                        <input type="email" name="Email" value="@Model.Email" class="input" readonly />
+                        <span>Email</span>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <label for="Name">Name</label>
+                        <input type="text" name="Name" value="@Model.Name" class="input" />
+                        <span>Name</span>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <input type="password" name="OldPassword" value="@Model.OldPassword" class="input" id="OldPassword" />
+                        <label for="">Old password</label>
+                        <span>Old password</span>
+                        <i class="bx bx-show toggle-password"></i>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <input type="password" name="NewPassword" value="@Model.NewPassword" class="input" id="NewPassword" />
+                        <label for="">New Password</label>
+                        <span>NewPassword</span>
+                        <i class="bx bx-show toggle-password"></i>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <input type="password" name="ConfirmPassword" value="@Model.ConfirmPassword" class="input" id="ConfirmPassword" />
+                        <label for="">Confirm Password</label>
+                        <span>ConfirmPassword</span>
+                        <i class="bx bx-show toggle-password"></i>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <input type="tel" name="Phone" value="@Model.Phone" class="input" />
+                        <label for="">Phone</label>
+                        <span>Phone</span>
+                    </div>
+
+                    <div class="input-container" focus>
+                        <input type="text" name="Handle" value="@Model.Handle" class="input" />
+                        <label for="Handle">Handle</label>
+                        <span>Handle</span>
+                    </div>
+
+                    <div style=" margin: 8px; font-size: 13px;" class="validation-summary">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" value="Save Changes" class="btn" />
+                    @if (ViewBag.CurrentUserLevel != 2)
+                    {
+                    <button type="button" class="btn" onclick="window.location.href='@Url.Action("LevelUpQuiz", "FinalQuiz")'">
+                        Update Level
+                    </button>
+                    }
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+    <button class="fixed-button" id="soundButton" onclick="window.location.href='@Url.Action("page", "Home")'">Come her</button>
+    <script>
+
+        function previewAvatar() {
+            const file = document.getElementById('avatar').files[0];
+            const preview = document.getElementById('avatar-preview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+         document.getElementById('editProfileForm').addEventListener('submit', function (event) {
+            const avatarInput = document.getElementById('avatar');
+            const hiddenAvatarInput = document.getElementById('hiddenAvatar');
+
+            if (avatarInput.files && avatarInput.files[0]) {
+                const file = avatarInput.files[0];
+                console.log("File selected for submission:", file.name);
+
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                hiddenAvatarInput.files = dataTransfer.files;
+            } else {
+                console.log("No file selected for submission.");
+            }
+        });
+
+
+        function showToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        window.onload = function () {
+        @if (ViewBag.SuccessMessage != null)
+        {
+            @:showToast('successToast');
+        }
+        @if (ViewBag.ErrorMessage != null)
+        {
+            @:showToast('errorToast');
+        }
+        };
+
+
+          document.addEventListener("DOMContentLoaded", () => {
+          const inputContainers = document.querySelectorAll(".input-container");
+          inputContainers.forEach((container) => {
+            container.classList.add("focus");
+          });
+
+
+          const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+          togglePasswordIcons.forEach((icon) => {
+            icon.addEventListener("click", () => {
+              const input = icon.parentElement.querySelector(".input");
+              if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("bx-show");
+                icon.classList.add("bx-hide");
+              } else {
+                input.type = "password";
+                icon.classList.remove("bx-hide");
+                icon.classList.add("bx-show");
+              }
+            });
+          });
+        });
+                var currentUserLevel = @(ViewBag.CurrentUserLevel ?? 0);
+        function checkLevel(event) {
+            event.preventDefault();
+            const requiredLevel = parseInt(event.currentTarget.dataset.levelRequired);
+            if (currentUserLevel < requiredLevel) {
+                const errorModal = document.getElementById('errorModal');
+                const errorMessageParagraph = errorModal.querySelector('p');
+                errorMessageParagraph.textContent = 'Access to this content is restricted. Please complete the Level 1 quiz to unlock Level 2.';
+                errorModal.style.display = 'flex';
+                const closeButton = errorModal.querySelector('.close-button');
+                closeButton.onclick = function() {
+                    errorModal.style.display = 'none';
+                };
+                window.onclick = function(event) {
+                    if (event.target == errorModal) {
+                        errorModal.style.display = 'none';
+                    }
+                };
+
+                return false;
+            } else {
+                window.location.href = event.currentTarget.href;
+                return true;
+            }
+        }
+
+               const soundButton = document.getElementById('soundButton');
+        const buttonSound = document.getElementById('buttonSound');
+
+        soundButton.addEventListener("mouseenter", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+        });
+
+        soundButton.addEventListener("click", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+
+            // فتح صفحة باستخدام Razor URL
+            setTimeout(() => {
+                window.location.href = '@Url.Action("page", "Home")';
+            }, 500);
+        });
+
+    </script>
+
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="~/js/app.js"></script>
+</body>
+

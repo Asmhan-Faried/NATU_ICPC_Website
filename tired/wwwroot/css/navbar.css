@@ -1,0 +1,397 @@
+:root {
+    --main-color: #0d2c54;
+    --main-color-2: #1E1E1E;
+    --main-color-3: #de1b10;
+    --main-color-4: #888282;
+    --main-color-5: #320889;
+    --main-color-6: #f2f5f7;
+    --main-footer: #6c757d;
+    --color-p: #b9b9b9;
+    --main-transition: 0.3s;
+    --main-padding-section-top: 6.25rem;
+    --main-padding-section-bottom: 6.25rem;
+    --main-log: #0d2c54;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    box-shadow: 0 0 25px var(--main-color);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color);
+    width: 50px;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 8px 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    /* background-color: #516d86; */
+    box-shadow: 0rem 0rem 0.5rem #000;
+}
+header .logo {
+    font-size: 1.3rem;
+    color: #252e5c;
+    font-weight: bold;
+}
+header .logo h3 {
+    display: flex;
+    align-items: center;
+}
+header img {
+    width: 45px;
+    margin-right: 6px;
+}
+header .icons img {
+    width: 40px;
+    border-radius: 50%;
+}
+header .logo {
+    margin-bottom: 2px;
+}
+header .navbar a {
+    font-size: 20px;
+    padding: 0 0.5rem;
+    color: #0d2c54;
+}
+.logo {
+    display: flex;
+}
+header #toggler {
+    display: none;
+}
+header .fa-bars {
+    font-size: 1.2rem;
+    color: #252e5c;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: .1rem solid #252e5c;
+    display: none;
+}
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    position: relative;
+}
+.navbar .dropdown .arrow {
+    font-size: 0.8rem;
+    margin-left: 5px;
+    position: relative;
+    top: 3px;
+}
+.navbar .dropdown-content {
+    display: none;
+    position: absolute; 
+    left: 0;
+    width: 100%; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 0.5rem; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.navbar .dropdown.active .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+.navbar .dropdown-content a {
+    background-color: var(--main-color-6);
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #beb9b9;
+}
+.navbar .dropdown-content a:last-child {
+    border-bottom: none;
+}
+.navbar .dropdown.active .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+.navbar .dropdown-content a:hover {
+    color: #de1b10;
+    text-shadow: 0rem 0rem 4rem #de1b10;
+}
+
+
+@media (max-width: 1285px) {
+    .navbar .dropdown-content {
+        position: static; 
+        width: 100%; 
+        box-shadow: none;
+        margin-top: 0;
+    }
+    .navbar .dropdown-content a {
+        padding: 0.8rem;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+    .navbar .dropdown.active {
+        display: block;
+    }
+
+    .navbar .dropdown.active + .navbar a {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 1200px) {
+    header .fa-bars {
+        display: block;
+    }
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--main-footer);
+        color: white;
+        border-top: .1rem solid rgba(0, 0, 0, .1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        display: grid;
+    }
+    header #toggler:checked ~ .navbar {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    header .navbar a {
+    margin: 0.3rem;
+    padding: 0.3rem;
+    background: var(--main-color-6);
+    border: 0.1rem solid rgba(0, 0, 0, .1);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    
+}
+header .navbar a {}
+
+    .navbar .dropdown {
+        width: 100%;
+        display: inline-block;
+    }
+
+    /* .navbar .dropdown .dropbtn {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+    } */
+
+    .navbar .dropdown-content {
+        position: static;
+        box-shadow: none;
+        width: 100%;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transition: none;
+        margin-top: 0;
+    }
+
+    .navbar .dropdown.open .dropdown-content {
+        display: block;
+    }
+
+    .navbar .dropdown-content a {
+        padding: 0.8rem;
+        border-bottom: 1px solid #ddd;
+    }
+    
+}
+
+header .icons img.logout {
+    width: 31px;
+    padding-bottom: 6px;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top, ensure it's above other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if content is too large */
+    background-color: rgba(0,0,0,0.6); /* Semi-transparent black overlay */
+    display: flex; /* Use flexbox to center the content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Modal Content (the actual message box) */
+.modal-content {
+    min-width: 280px; /* Minimum width for the message box */
+    max-width: 400px; /* Maximum width to prevent it from being too wide */
+    padding: 20px; /* Padding around the text */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    margin: auto; /* Ensures centering even if flexbox isn't fully supported or for older browsers */
+}
+
+/* Error specific styling for the message box */
+.error-modal-content {
+    background-color: #dc3545; /* A more prominent red for error messages */
+    color: white; /* White text for better contrast on red background */
+    border-color: #dc3545; /* Match border color to background */
+    padding: 25px;
+}
+
+/* Close Button */
+.close-button {
+    color: white; /* White close button for better visibility on red background */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: -6px;
+    right: 15px;
+}
+
+    .close-button:hover,
+    .close-button:focus {
+        color: #f8f9fa; /* Lighter white on hover */
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Animation (keep as is) */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #de1b10;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    /* Bouncing Animation */
+    animation: realisticBounce 2s ease-in-out infinite;
+}
+
+    .fixed-button:hover {
+        background-color: white;
+        color: #de1b10;
+    }
+
+@keyframes realisticBounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    10% {
+        transform: translateY(-30px);
+    }
+
+    20% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-20px);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(0);
+    }
+
+    70% {
+        transform: translateY(-5px);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

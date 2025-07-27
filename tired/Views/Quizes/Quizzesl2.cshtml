@@ -1,0 +1,455 @@
+﻿@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Quizzes C++</title>
+    <link rel="stylesheet" href="~/css/home.css">
+    <link rel="stylesheet" href="~/css/navbar.css">
+    <link rel="stylesheet" href="~/css/quizzes.css">
+
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="icon" href="~/img/ICPC.jpeg" type="image/x-icon" class="icon">
+    <link rel="shortcut icon" href="~/img/ICPC.jpeg" type="image/x-icon">
+    <script src="~/js/quizzes.js" asp-append-version="true" defer></script>
+    </head>
+<body>
+    <style>
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #de1b10;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            /* Bouncing Animation */
+            animation: realisticBounce 2s ease-in-out infinite;
+        }
+
+            .fixed-button:hover {
+                background-color: white;
+                color: #de1b10;
+            }
+
+        @@keyframes realisticBounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            10% {
+                transform: translateY(-30px);
+            }
+
+            20% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-20px);
+            }
+
+            40% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(0);
+            }
+
+            70% {
+                transform: translateY(-5px);
+            }
+
+            80% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+        <header>
+            <input type="checkbox" name="" id="toggler">
+            <label for="toggler" class="fas fa-bars"></label>
+            <a href="#" class="logo">
+                <img src="~/img/logo.png">
+                <h3> ICPC Community</h3>
+            </a>
+            <nav class="navbar">
+                <a href="@Url.Action("Frist","Home")">Home</a>
+                <div class="dropdown">
+                    <a href="#trainingPlan" class="dropbtn">
+                        Training Plan <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("TrainingPlan", "Home")">Level 1</a>
+                        <a href="@Url.Action("TrainingPlan2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">
+                        Quizzes <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Quizs","Quizes")">Level 1</a>
+                        <a href="@Url.Action("Quizzesl2", "Quizes")">Level 2</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#contests" class="dropbtn">
+                        Contests <span class="arrow">&#9660;</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("Contests", "Home")">Level 1</a>
+                        <a href="@Url.Action("Contests2", "Home")">Level 2</a>
+
+                    </div>
+                </div>
+                <a href="@Url.Action("Mentors", "Home")">Mentors</a>
+                <a href="@Url.Action("Index", "Contact")">Contact Us</a>
+                
+
+            </nav>
+
+            <div class="icons">
+                <a href="@Url.Action("EditProfile", "Account")">
+                    <img src="~/img/user.jpg" style="cursor: pointer;" alt="Your prof">
+                </a>
+            <a href="@Url.Action("Logout", "Account")">
+                <img class="logout" src="~/img/logout.jpg" style="cursor: pointer;" alt="Your prof">
+            </a>
+            </div>
+
+        </header>
+        <section id="home">
+
+
+        <section class="Programming" id="Programming">
+            <h2 class="heading">Quizzes C++ Level 2</h2>
+            <h2 style="margin-bottom: 0;margin-top: 0;" class="heading"><span class="e-color">Easy</span></h2>
+            <div class="Programming-container">
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 1</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize1", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-left" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 2</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize2", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="zoom-out-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 3</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize3", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="zoom-out-left" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 4</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize4", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    </div>
+                    </section>
+
+                <section class="Programming" id="Programming">
+            <h2 style="margin-bottom: 0;margin-top: 0;" class="heading"><span class="m-color">Medium</span></h2>
+                    <div class="Programming-container">
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 5</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize5", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 6</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize6", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 7</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize7", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 8</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize8", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    </div>
+                    </section>
+
+             <section class="Programming" id="Programming">
+            <h2 style="margin-bottom: 0;margin-top: 0;" class="heading"><span class="h-color">Hard</span></h2>
+                <div class="Programming-container">
+                    <div class="Programming-box" data-aos="zoom-out-left" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 9</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize9", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 10</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize10", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 11</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize11", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="Programming-box" data-aos="fade-down-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="Programming-info">
+                            <h4>Quiz 12</h4>
+                            <button class="button" style="--color: #00afaf" onclick="window.location.href='@Url.Action("Quize12", "Quizes")'">
+                                <span class="text">Start</span>
+                                <div class="icon">
+                                    <svg>
+                                        <use xlink:href="#arrow-right"></use>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <svg style="display: none">
+                                <symbol id="arrow-right" viewBox="0 0 20 10">
+                                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        <button class="fixed-button" id="soundButton" onclick="window.location.href='@Url.Action("page", "Home")'">Come her</button>
+
+            <script src="~/js/app.js"></script>
+            <script src="~/js/quizzes.js"></script>
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script>
+                AOS.init({
+                    once: false
+                });
+            </script>
+        </section>
+
+    <script>
+
+             const dropdownBtn = document.querySelector('.dropbtn');
+            const dropdown = document.querySelector('.dropdown');
+
+            if (dropdownBtn && dropdown) {
+              dropdownBtn.addEventListener('focus', () => {
+                dropdown.classList.add('open');
+              });
+            }
+        dropdownBtn.addEventListener('focusout', () => {
+            dropdown.classList.remove('open');
+        });
+
+                const soundButton = document.getElementById('soundButton');
+        const buttonSound = document.getElementById('buttonSound');
+
+        soundButton.addEventListener("mouseenter", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+        });
+
+        soundButton.addEventListener("click", () => {
+            buttonSound.currentTime = 0;
+            buttonSound.play();
+
+            // فتح صفحة باستخدام Razor URL
+            setTimeout(() => {
+                window.location.href = '@Url.Action("page", "Home")';
+            }, 500);
+        });
+
+        </script>
+</body>
+
+
