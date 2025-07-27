@@ -4,11 +4,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+
+# 👇 نسخ كل الملفات من الريبو
 COPY . .
 
-# 👈 ده المسار الصحيح لملف المشروع جوا فولدر tired
+# 👇 Restore و Build على المشروع داخل مجلد tired
 RUN dotnet restore tired/tired.csproj
-
 RUN dotnet publish tired/tired.csproj -c Release -o /app/publish
 
 FROM base AS final
